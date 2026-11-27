@@ -1,4 +1,4 @@
-name: transcore-backend
+name: auth_system_go
 
 services:
   postgres:

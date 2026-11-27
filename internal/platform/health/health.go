@@ -45,7 +45,8 @@ func (h *Handler) Drain() {
 // Live reports that the process is running. It checks no dependencies, so a
 // database outage never gets a healthy pod restarted.
 func (h *Handler) Live(w http.ResponseWriter, _ *http.Request) {
-	w.WriteHeader(http.StatusNoContent)
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("OK"))
 }
 
 // Ready returns 204 when the service can take traffic, and 503 while
@@ -63,5 +64,6 @@ func (h *Handler) Ready(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	w.WriteHeader(http.StatusNoContent)
+	w.WriteHeader(http.StatusOK)
+	_, _ = w.Write([]byte("OK"))
 }

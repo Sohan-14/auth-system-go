@@ -4,8 +4,6 @@ import (
 	"log/slog"
 	"net/http"
 	"time"
-
-	"github.com/sohan-14/auth-system-go/internal/platform/requestid"
 )
 
 // AccessLog logs one line per request.
@@ -24,7 +22,7 @@ func AccessLog(log *slog.Logger) Middleware {
 			}
 
 			log.LogAttrs(r.Context(), level, "http request",
-				slog.String("request_id", requestid.FromContext(r.Context())),
+				// slog.String("request_id", requestid.FromContext(r.Context())),
 				slog.String("method", r.Method),
 				slog.String("path", r.URL.Path),
 				slog.Int("status", status),
