@@ -96,7 +96,7 @@ func (s *Server) serve(ctx context.Context, ln net.Listener) error {
 // accepting work and waits for in-flight requests
 func (s *Server) shutdown(ctx context.Context) error {
 	s.draining.Store(true)
-	s.srv.SetKeepAlivesEnabled(false) 
+	s.srv.SetKeepAlivesEnabled(false)
 	for _, fn := range s.onDrain {
 		fn()
 	}

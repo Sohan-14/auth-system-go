@@ -11,12 +11,13 @@ const (
 	envHTTPAddr              = "HTTP_ADDR"
 	envHTTPReadTimeout       = "HTTP_READ_TIMEOUT"
 	envHTTPReadHeaderTimeout = "HTTP_READ_HEADER_TIMEOUT"
-	envHTTPWriteTimeout      = "HTTP_WRITE_TIMEOUT"
-	envHTTPIdleTimeout       = "HTTP_IDLE_TIMEOUT"
-	envHTTPShutdownTimeout   = "HTTP_SHUTDOWN_TIMEOUT"
-	envHTTPDrainDelay        = "HTTP_DRAIN_DELAY"
-	envHTTPMaxBodyBytes      = "HTTP_MAX_BODY_BYTES"
-	envHTTPMaxHeaderBytes    = "HTTP_MAX_HEADER_BYTES"
+	//nolint:gosec
+	envHTTPWriteTimeout    = "HTTP_WRITE_TIMEOUT"
+	envHTTPIdleTimeout     = "HTTP_IDLE_TIMEOUT"
+	envHTTPShutdownTimeout = "HTTP_SHUTDOWN_TIMEOUT"
+	envHTTPDrainDelay      = "HTTP_DRAIN_DELAY"
+	envHTTPMaxBodyBytes    = "HTTP_MAX_BODY_BYTES"
+	envHTTPMaxHeaderBytes  = "HTTP_MAX_HEADER_BYTES"
 
 	// logger
 	envLogLevel     = "LOG_LEVEL"
