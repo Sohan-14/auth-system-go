@@ -4,7 +4,7 @@ import "github.com/sohan-14/auth-system-go/internal/apperr"
 
 // ParseRegistration validates registration input and returns the normalized
 // email. All field problems are reported together.
-func ParseRegistration(rawEmail, password string) (Email, error) {
+func ParseRegistration(rawEmail, password string) (string, error) {
 	email, emailErr := parseEmail(rawEmail)
 	passErr := checkPassword(password)
 
