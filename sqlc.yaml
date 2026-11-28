@@ -1,0 +1,39 @@
+version: "2"
+sql:
+  # ==================================================
+  # Start: module auth
+  # ==================================================
+  - engine: "postgresql"
+    queries: "internal/modules/auth/internal/adapters/postgres/queries"
+    schema: "migrations/"
+    gen:
+      go:
+        package: "db"
+        out: "internal/modules/auth/internal/adapters/postgres/db"
+        sql_package: "pgx/v5"
+        emit_json_tags: false
+        emit_empty_slices: true
+        overrides:
+          - db_type: "uuid"
+            go_type: "github.com/google/uuid.UUID"
+          - db_type: "citext"
+            go_type: "string"
+  # ==================================================
+  # END: module auth
+  # ==================================================
+  # ==================================================
+  # Start: per module
+  # ==================================================
+  # - engine: "postgresql"
+  #   queries: ""
+  #   schema: "migrations/"
+  #   gen:
+  #     go:
+  #       package: "db"
+  #       out: ""
+  #       sql_package: "pgx/v5"
+  #       emit_json_tags: false
+  #       emit_empty_slices: true
+  # ==================================================
+  # END: per module
+  # ==================================================
