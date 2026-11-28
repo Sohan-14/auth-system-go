@@ -20,11 +20,14 @@ func New(
 	errorWriter *httpx.ErrorWriter,
 ) *Module {
 	userRepository := postgres.NewUserRepository(pool)
+
 	registerUsecase := usecase.NewRegister(userRepository)
+	loginUsecase := usecase.NewLogin(userRepository)
 
 	return &Module{
 		v1Handler: v1.NewHandler(
 			registerUsecase,
+			loginUsecase,
 			errorWriter,
 		),
 	}

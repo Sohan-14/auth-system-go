@@ -8,5 +8,6 @@ import (
 
 // UserRepository stores users port
 type UserRepository interface {
-	Create(ctx context.Context, u *domain.UserParams) (*domain.User, error)
+	Create(ctx context.Context, userParams *domain.UserParams) (*domain.User, error)
+	GetByEmail(ctx context.Context, email string) (*domain.User, error)
 }

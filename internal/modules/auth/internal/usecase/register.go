@@ -6,7 +6,7 @@ import (
 	"github.com/sohan-14/auth-system-go/internal/modules/auth/internal/domain"
 )
 
-// Register hold the
+// Register hold the repository
 type Register struct {
 	userRepository UserRepository
 }
@@ -22,7 +22,7 @@ type RegisterInput struct {
 	Password string
 }
 
-// Create validates the input, hashes the password and stores the user.
+// Create validates the input and stores the user.
 func (r *Register) Create(
 	ctx context.Context,
 	in RegisterInput,
@@ -36,7 +36,6 @@ func (r *Register) Create(
 		Email:        email,
 		PasswordHash: in.Password,
 	})
-
 	if err != nil {
 		return nil, err
 	}

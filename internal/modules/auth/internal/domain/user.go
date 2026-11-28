@@ -9,10 +9,11 @@ import (
 // User is domain level type for user
 // User is a stored account.
 type User struct {
-	ID        uuid.UUID
-	Email     string
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID           uuid.UUID
+	Email        string
+	PasswordHash string
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
 }
 
 // UserParams is an account that has not been stored yet
