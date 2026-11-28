@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/sohan-14/auth-system-go/internal/modules/auth"
 	"github.com/sohan-14/auth-system-go/internal/platform/config"
 	"github.com/sohan-14/auth-system-go/internal/platform/database"
 	"github.com/sohan-14/auth-system-go/internal/platform/health"
@@ -54,6 +55,9 @@ func Run(ctx context.Context,
 	// router
 	r := router.New()
 
+	// error writer
+	errorWriter := httpx.NewErrorWriter(log)
+
 	// Operational endpoints: unversioned and unauthenticated.
 	r.HandleFunc("GET /healthz", hc.Live)
 	r.HandleFunc("GET /readyz", hc.Ready)
@@ -62,9 +66,12 @@ func Run(ctx context.Context,
 	handler := middleware.Chain(r,
 		middleware.RequestID,
 		middleware.AccessLog(log),
-		middleware.Recover(log, httpx.NewErrorWriter(log).Write),
-		middleware.MaxBodySize(cfg.HTTP.MaxBodyBytes, httpx.NewErrorWriter(log).Write),
+		middleware.Recover(log, errorWriter.Write),
+		middleware.MaxBodySize(cfg.HTTP.MaxBodyBytes, errorWriter.Write),
 	)
+
+	authModule := auth.New(db.Pool(), errorWriter)
+	authModule.RegisterRoutes(r)
 
 	// server
 	srv := httpserver.New(&cfg.HTTP, log, handler)
